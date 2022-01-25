@@ -8,17 +8,18 @@
     <title>Blog Laravel</title>
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
-
-    <style>
-        body {
-            font-family: 'Nunito', sans-serif;
-        }
-    </style>
+    <link rel="stylesheet" href="./css/all.css" />
 </head>
 
 <body>
     <div id="app">
-        <mainapp></mainapp>
+
+        {{-- @forelse ($tags as $tag)
+        <li>{{ $tag->id }}- {{ $tag->tagName }}</li>
+        @empty
+        <p>No users</p>
+        @endforelse --}}
+        <base-template></base-template>
     </div>
     <script src="{{ mix('js/app.js') }}"></script>
 </body>
