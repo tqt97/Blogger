@@ -29,7 +29,7 @@ export default {
                 desc: desc ? desc : ''
             });
         },
-        error (desc, title = 'Error') {
+        error (desc='Oops, something went wrong !', title = 'Error') {
             this.$Notice.error({
                 title: title,
                 desc: desc ? desc : ''

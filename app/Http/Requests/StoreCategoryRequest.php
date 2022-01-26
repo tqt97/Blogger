@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreTagRequest extends FormRequest
+class StoreCategoryRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,14 +24,15 @@ class StoreTagRequest extends FormRequest
     public function rules()
     {
         return [
-            'tagName' => 'required|unique:tags,tagName'
+            'categoryName' => 'required',
+            'iconImage' => 'required',
         ];
     }
     public function message()
     {
         return [
-            'tagName.required' => 'Tag name is required',
-            'tagName.unique' => 'Tag name is exist. Please try another tag name.'
+            'categoryName.required' => 'Category name is required',
+            'iconImage.required' => 'Icon image is required',
         ];
     }
 }

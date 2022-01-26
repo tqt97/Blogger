@@ -9,6 +9,13 @@
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./css/all.css" />
+    <script>
+        (function() {
+            window.Laravel = {
+                csrfToken: '{{ csrf_token() }}'
+            }
+        })()
+    </script>
 </head>
 
 <body>
