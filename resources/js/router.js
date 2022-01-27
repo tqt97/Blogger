@@ -6,15 +6,16 @@ Vue.use(Router);
 import home from './components/pages/Home';
 import tags from './backend/pages/tags';
 import categories from './backend/pages/categories';
-
+import users from './backend/pages/users';
+import login from './backend/pages/login';
 
 
 const routes = [
     {path: '/', component: home},
     {path: '/tags', component: tags},
-    {path: '/categories', component: categories}
-
-
+    {path: '/categories', component: categories},
+    {path: '/users', component: users},
+    {path: '/login', component: login},
 ];
 export default new Router({
     mode: 'history',

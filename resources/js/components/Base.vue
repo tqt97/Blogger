@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div>
+        <div v-if="$store.state.user">
             <!--========== ADMIN SIDE MENU one ========-->
             <div class="_1side_menu">
                 <div class="_1side_menu_logo">
@@ -36,6 +36,21 @@
                                     Categories
                                 </router-link>
                             </li>
+                            <li>
+                                <router-link to="/users">
+                                    <Icon type="ios-people" />
+                                    Users
+                                </router-link>
+                            </li>
+                            <li>
+                                <router-link to="/login">
+                                    <Icon type="ios-people" />
+                                    Login
+                                </router-link>
+                            </li>
+                            <li>
+                                <a href="/app/admin_logout">Log out</a>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -60,3 +75,17 @@
         <router-view />
     </div>
 </template>
+<script>
+export default {
+    props: ["user"],
+    data() {
+        return {
+            isLoggedIn: false,
+        };
+    },
+    created() {
+        this.$store.commit("updateUser", this.user);
+        console.log(this.user);
+    },
+};
+</script>

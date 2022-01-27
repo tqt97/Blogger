@@ -1,8 +1,11 @@
 <?php
 
+use App\Http\Controllers\Backend\AdminAuthController;
 use App\Http\Controllers\Backend\AdminCategoryController;
+use App\Http\Controllers\Backend\AdminController;
 use App\Http\Controllers\Backend\AdminTagController;
 use App\Http\Controllers\Backend\AdminUploadController;
+use App\Http\Controllers\Backend\AdminUserController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -22,10 +25,23 @@ Route::get('app/get_categories', [AdminCategoryController::class, 'index']);
 Route::post('app/edit_category', [AdminCategoryController::class, 'update']);
 Route::post('app/delete_category', [AdminCategoryController::class, 'delete']);
 
+// Users
+Route::get('app/get_users', [AdminUserController::class, 'index']);
+Route::post('app/create_user', [AdminUserController::class, 'store']);
+Route::post('app/edit_user', [AdminUserController::class, 'update']);
 
-Route::get('/', function () {
-    return view('welcome');
-});
-Route::any('{slug}', function () {
-    return view('welcome');
-});
+//Authentication
+Route::post('app/admin_login', [AdminAuthController::class, 'login']);
+Route::get('app/admin_logout', [AdminAuthController::class, 'logout']);
+
+// Dashboard
+Route::get('/', [AdminController::class, 'index']);
+Route::get('{slug}', [AdminController::class, 'index']);
+
+
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+// Route::any('{slug}', function () {
+//     return view('welcome');
+// });
