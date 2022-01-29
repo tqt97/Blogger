@@ -5,10 +5,16 @@ import router from './router';
 import store from './store';
 import ViewUI from 'view-design';
 import 'view-design/dist/styles/iview.css';
+import Editor from 'vue-editor-js'
+// import Editor from 'vue-editor-js/src/index'
+
 Vue.use(ViewUI);
+Vue.use(Editor);
 
 import common from './common';
+import jsonToHtml from './jsonToHtml';
 Vue.mixin(common);
+Vue.mixin(jsonToHtml);
 
 
 Vue.config.productionTip = false;

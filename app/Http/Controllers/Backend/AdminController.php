@@ -26,6 +26,26 @@ class AdminController extends Controller
         if ($request->path() == 'login') {
             return redirect('/');
         }
-        return view('welcome');
+        return $this->checkForPermission($user, $request);
+        // return view('404');
+        // return view('welcome');
+    }
+    public function checkForPermission($user, $request)
+    {
+        $permissions = json_decode($user->role->permission);
+        $hasPermission = false;
+        if (!$permissions) {
+            return view('welcome');
+        }
+        foreach ($permissions as $p) {
+            if ($p->name == $request->path()) {
+                if ($p->read) {
+                    $hasPermission = true;
+                }
+            }
+        }
+        if ($hasPermission) return view('welcome');
+        // return view('welcome');
+        return view('404');
     }
 }

@@ -38,7 +38,7 @@ class AdminCategoryController extends Controller
     {
         return Category::orderBy('id', 'DESC')->get();
     }
-    public function store(StoreCategoryRequest $request)
+    public function store(StoreCategoryRequest $request) 
     {
         return Category::create([
             'categoryName' => $request->categoryName,

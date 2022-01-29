@@ -30,4 +30,20 @@ class AdminUploadController extends Controller
         $this->deleteFileFromServer($fileName);
         return 'DELETE';
     }
+
+    public function upload(Request $request)
+    {
+        $this->validate($request, [
+            'image' => 'required|mimes:jpeg,png,jpg,bmp,gif',
+        ]);
+        $picName = time() . '.' . $request->image->extension();
+        $request->image->move(public_path('uploads'), $picName);
+        return response()->json([
+            'success' => 1,
+            'file' => [
+                'url' =>    "http://127.0.0.1:8000/uploads/$picName"
+            ]
+        ]);
+        return $picName;
+    }
 }

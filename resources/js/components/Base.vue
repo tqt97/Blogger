@@ -4,27 +4,31 @@
             <!--========== ADMIN SIDE MENU one ========-->
             <div class="_1side_menu">
                 <div class="_1side_menu_logo">
-                    <h3 style="text-align: center">Logo Image</h3>
-                    <!--<img src="/img/logo.jpg" style="width: 108px;margin-left: 68px;"/>-->
+                    <h3 style="text-align: center">Blogger of me</h3>
+                    <!-- <img src="/img/logo.jpg" style="width: 108px;margin-left: 68px;"/> -->
                 </div>
 
                 <!--~~~~~~~~ MENU CONTENT ~~~~~~~~-->
                 <div class="_1side_menu_content">
                     <div class="_1side_menu_img_name">
                         <!-- <img class="_1side_menu_img" src="/pic.png" alt="" title=""> -->
-                        <p class="_1side_menu_name">Admin</p>
+                        <p class="_1side_menu_name">Adminstration</p>
                     </div>
 
                     <!--~~~ MENU LIST ~~~~~~-->
                     <div class="_1side_menu_list">
                         <ul class="_1side_menu_list_ul">
-                            <li>
-                                <router-link to="/">
+                            <li
+                                v-for="(menuItem, i) in permission"
+                                :key="i"
+                                v-if="menuItem.read"
+                            >
+                                <router-link :to="'/'+menuItem.name">
                                     <Icon type="ios-podium" />
-                                    Dashboard
+                                    {{ menuItem.resourceName }}
                                 </router-link>
                             </li>
-                            <li>
+                            <!-- <li>
                                 <router-link to="/tags">
                                     <Icon type="ios-pricetags" />
                                     Tags
@@ -43,13 +47,22 @@
                                 </router-link>
                             </li>
                             <li>
-                                <router-link to="/login">
-                                    <Icon type="ios-people" />
-                                    Login
+                                <router-link to="/roles">
+                                   <Icon type="md-git-network" />
+                                    Roles
                                 </router-link>
                             </li>
                             <li>
-                                <a href="/app/admin_logout">Log out</a>
+                                <router-link to="/permissions">
+                                  <Icon type="md-options" />
+                                    Permission
+                                </router-link>
+                            </li>
+                            -->
+                            <li>
+                                <a href="/app/admin_logout">
+                                    <Icon type="md-log-out" /> Log out</a
+                                >
                             </li>
                         </ul>
                     </div>
@@ -77,15 +90,16 @@
 </template>
 <script>
 export default {
-    props: ["user"],
+    props: ["user", "permission"],
     data() {
         return {
             isLoggedIn: false,
         };
     },
     created() {
-        this.$store.commit("updateUser", this.user);
-        console.log(this.user);
+        this.$store.commit("setUpdateUser", this.user);
+        this.$store.commit("setUserPermission", this.permission);
+        // console.log(this.permission);
     },
 };
 </script>

@@ -10,7 +10,7 @@
     {{-- <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet"> --}}
     {{-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous"> --}}
     {{-- <link rel="stylesheet" href="{{ asset('./js/static/owl.carousel.min.css') }}"> --}}
-    <link rel="stylesheet" href="./css/all.css" />
+    <link rel="stylesheet" href="{{ asset('./css/all.css') }}" />
     <script>
         (function() {
             window.Laravel = {
@@ -18,6 +18,7 @@
             }
         })()
     </script>
+    {{-- <script>window.Laravel = {csrfToken: '{{ csrf_token() }}'}</script> --}}
     {{-- <script src="{{ asset('./js/static/jquery.min.js') }}"></script> --}}
 
     {{-- <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script> --}}
@@ -44,12 +45,14 @@
         <p>No users</p>
         @endforelse --}}
         @if (Auth::check())
-            <base-template :user="{{ Auth::user() }}"></base-template>
+            <base-template :user="{{ Auth::user() }}" :permission="{{ Auth::user()->role->permission }}">
+            </base-template>
         @else
             <base-template :user="false"></base-template>
         @endif
     </div>
     <script src="{{ mix('js/app.js') }}"></script>
+
 </body>
 
 </html>

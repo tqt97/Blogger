@@ -27,7 +27,7 @@ class AdminEditUserRequest extends FormRequest
         return [
             'fullName' => 'required',
             'email' => 'bail|email|unique:users,email,' . $this->id,
-            'userType' => 'required'
+            'role_id' => 'required'
         ];
     }
     public function message()
@@ -36,7 +36,7 @@ class AdminEditUserRequest extends FormRequest
             'fullName.required' => 'Full name is required',
             'email.required' => 'Email is required',
             'email.unique' => 'Email is already exists',
-            'userType.required' => 'User type is required',
+            'role_id.required' => 'User type is required',
         ];
     }
 }

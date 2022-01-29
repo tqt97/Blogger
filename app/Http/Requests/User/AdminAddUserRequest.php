@@ -27,7 +27,7 @@ class AdminAddUserRequest extends FormRequest
             'fullName' => 'required',
             'password' => 'required',
             'email' => 'email|unique:users,email',
-            'userType' => 'required',
+            'role_id' => 'required',
         ];
     }
     public function message()
@@ -37,7 +37,7 @@ class AdminAddUserRequest extends FormRequest
             'email.required'=>'Email is required',
             'password.required'=>'Password is required',
             'email.unique'=>'Email is already exists',
-            'userType.required'=>'User type is required',
+            'role_id.required'=>'User type is required',
         ];
     }
 }

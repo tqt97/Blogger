@@ -16,10 +16,10 @@ class AdminAuthController extends Controller
         ]);
         if (Auth::attempt($credentials)) {
             $user = Auth::user();
-            if ($user->userType === 'user') {
+            if ($user->role->isAdmin == 0) {
                 Auth::logout();
                 return response()->json([
-                    'msg' => 'Log in error 💥💥💥'
+                    'msg' => 'User does not allow to access 💥💥💥'
                 ], 401);
             }
             return response()->json([

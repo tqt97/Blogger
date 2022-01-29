@@ -19,7 +19,7 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'fullName', 'email', 'password', 'userType', 'isActive', 'passwordResetCode', 'activationCode', 'socialType'
+        'fullName', 'email', 'password', 'role_id', 'isActive', 'passwordResetCode', 'activationCode', 'socialType'
     ];
 
     /**
@@ -49,4 +49,8 @@ class User extends Authenticatable
     // {
     //     return Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('Y-m-d');
     // }
+    public function role()
+    {
+        return $this->belongsTo('App\Models\Role');
+    }
 }

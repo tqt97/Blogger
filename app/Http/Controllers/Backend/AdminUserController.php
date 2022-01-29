@@ -12,7 +12,7 @@ class AdminUserController extends Controller
 {
     public function index()
     {
-        return User::where('userType', '!=', 'user')->orderBy('id', 'DESC')->get();
+        return User::where('role_id', '!=', 4)->orderBy('id', 'DESC')->get();
     }
     public function store(AdminAddUserRequest $request)
     {
@@ -21,7 +21,7 @@ class AdminUserController extends Controller
             'fullName' => $request->fullName,
             'email' => $request->email,
             'password' => $password,
-            'userType' => $request->userType,
+            'role_id' => $request->role_id,
         ]);
     }
     public function update(AdminEditUserRequest $request)
@@ -30,7 +30,7 @@ class AdminUserController extends Controller
         $data = [
             'fullName' => $request->fullName,
             'email' => $request->email,
-            'userType' => $request->userType,
+            'role_id' => $request->role_id,
         ];
         if ($request->password) {
             $password = bcrypt($request->password);

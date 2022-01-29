@@ -1,3 +1,5 @@
+import {mapGetters} from 'vuex';
+
 export default {
     methods: {
         async callApi (method, url, dataObj) {
@@ -23,17 +25,48 @@ export default {
                 desc: desc ? desc : ''
             });
         },
-        warning (desc, title = 'Warning') {
+        warning2 (desc, title = 'Warning') {
             this.$Notice.warning({
                 title: title,
                 desc: desc ? desc : ''
             });
         },
-        error (desc='Oops, something went wrong !', title = 'Error') {
+        error (desc = 'Oops, something went wrong !', title = 'Error') {
             this.$Notice.error({
                 title: title,
                 desc: desc ? desc : ''
             });
+        },
+        checkUserPermission (key) {
+            if (!this.userPermission) return true;
+            let isPermitted = false;
+            for (let d of this.userPermission) {
+                if (this.$route.name === d.name) {
+                    if (d[ key ]) {
+                        isPermitted = true;
+                        break;
+                    } else {break;}
+                }
+            }
+            return isPermitted;
+        }
+    },
+    computed: {
+
+        ...mapGetters({
+            'userPermission': 'getUserPermission'
+        }),
+        isCreatePermitted () {
+            return this.checkUserPermission('create');
+        },
+        isReadPermitted () {
+            return this.checkUserPermission('read');
+        },
+        isUpdatePermitted () {
+            return this.checkUserPermission('update');
+        },
+        isDeletePermitted () {
+            return this.checkUserPermission('delete');
         }
     }
 };

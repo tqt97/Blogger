@@ -93,8 +93,8 @@ export default {
             );
             this.isLogging = true;
             if (res.status === 200) {
-                this.success(res.data.msg);
                 window.location = "/";
+                this.success(res.data.msg);
             } else {
                 if (res.status === 401) {
                     this.info(res.data.msg);

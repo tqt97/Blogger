@@ -81,7 +81,7 @@
                         :max-size="2048"
                         :on-format-error="handleFormatError"
                         :on-exceeded-size="handleMaxSize"
-                        action="/app/upload"
+                        action="app/upload"
                     >
                         <div style="padding: 20px 0">
                             <Icon
@@ -143,7 +143,7 @@
                         :max-size="2048"
                         :on-format-error="handleFormatError"
                         :on-exceeded-size="handleMaxSize"
-                        action="/app/upload"
+                        action="app/upload"
                     >
                         <div style="padding: 20px 0">
                             <Icon
@@ -216,6 +216,10 @@ export default {
     },
     methods: {
         async addCategory() {
+            if (this.data.categoryName.trim() == "")
+                return this.e("Category name is required");
+            if (this.data.iconImage.trim() == "")
+                return this.e("Icon image is required");
             this.data.iconImage = `${this.data.iconImage}`;
             const res = await this.callApi(
                 "post",
@@ -223,6 +227,7 @@ export default {
                 this.data
             );
             if (res.status === 201) {
+                console.log(res.data);
                 this.categoryLists.unshift(res.data);
                 this.success("Category has been added successfully!");
                 this.addModal = false;
@@ -279,6 +284,8 @@ export default {
                 data: category,
                 deletingIndex: i,
                 isDeleted: false,
+                msg: "Are you sure you want to delete this category ?",
+                successMsg: "Category has been deleted successfully 🎉🎉🎉",
             };
             this.$store.commit("setDeletingModalObj", deleteModalObj);
         },
@@ -357,7 +364,7 @@ export default {
     watch: {
         getDeleteModalObj(obj) {
             if (obj.isDeleted) {
-                this.categoryLists.splice(obj.deletingIndex, 1);
+                this.categoryLists.splice(this.deletingIndex, 1);
             }
         },
     },
